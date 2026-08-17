@@ -27,6 +27,7 @@
   --text-eyebrow--letter-spacing: calc(2.5em / 17);
 
   --text-body: 1.25rem;
+  --text-body--line-height: 1.5;
 
   --text-body-sm: 1rem;
   --text-body-sm--line-height: 1.625;
@@ -52,7 +53,10 @@
   --color-error: #b54949;
   --color-veil: #f2f3f5;
 
+  --breakpoint-wide: 76rem;
+
   --container-board: 69.375rem;
+  --container-column: 43.0625rem;
   --radius-curve: 6.25rem;
   --shadow-panel: 0 75px 100px -50px rgb(56 66 85 / 0.5);
 }
@@ -81,13 +85,38 @@
 }
 
 @utility v-board {
-  @apply mx-auto w-full px-6 md:px-10;
+  @apply mx-auto w-full px-6;
 
-  max-width: calc(var(--container-board) + 2 * --spacing(10));
+  max-width: calc(var(--container-column) + 2 * --spacing(6));
+
+  @variant wide {
+    @apply px-10;
+
+    max-width: calc(var(--container-board) + 2 * --spacing(10));
+  }
 }
 
 @utility v-focus-ring {
   &:focus-visible {
     @apply outline-2 outline-offset-4 outline-current;
+  }
+}
+
+@utility v-wipe {
+  &::before {
+    @apply absolute inset-0 -z-10 origin-left scale-x-0 bg-white content-[''];
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    @apply scale-x-100;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @apply transition-colors duration-500 ease-out;
+
+    &::before {
+      @apply transition-transform duration-500 ease-out;
+    }
   }
 }
