@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@source not "../../*.md";
+
+@theme inline {
+  --font-sans: var(--font-league-spartan);
+}
+
+@layer base {
+  a,
+  button {
+    @apply v-focus-ring;
+  }
+
+  button:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@utility v-focus-ring {
+  &:focus-visible {
+    @apply outline-2 outline-offset-4 outline-current;
+  }
+}
