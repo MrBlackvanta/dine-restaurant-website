@@ -1,11 +1,75 @@
 @import "tailwindcss";
 @source not "../../*.md";
 
+@theme {
+  --text-display: 5rem;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.0125em;
+
+  --text-display-md: 3rem;
+  --text-display-md--line-height: calc(4 / 3);
+  --text-display-md--letter-spacing: -0.0125em;
+
+  --text-display-sm: 2rem;
+  --text-display-sm--line-height: 1.25;
+  --text-display-sm--letter-spacing: -0.0125em;
+
+  --text-section: 3rem;
+  --text-section--line-height: 1;
+  --text-section--letter-spacing: calc(-1em / 96);
+
+  --text-title: 1.25rem;
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.0125em;
+
+  --text-eyebrow: 1.0625rem;
+  --text-eyebrow--line-height: calc(28 / 17);
+  --text-eyebrow--letter-spacing: calc(2.5em / 17);
+
+  --text-body: 1.25rem;
+
+  --text-body-sm: 1rem;
+  --text-body-sm--line-height: 1.625;
+
+  --text-field: 1.25rem;
+  --text-field--line-height: 1.4;
+
+  --text-meta: 0.875rem;
+  --text-meta--line-height: 2;
+  --text-meta--letter-spacing: calc(1em / 7);
+
+  --text-hint: 0.625rem;
+  --text-hint--line-height: 1;
+  --text-hint--letter-spacing: -0.0125em;
+
+  --color-ink: #242b37;
+  --color-ink-strong: #111111;
+  --color-ink-muted: #767676;
+  --color-surface-dark: var(--color-ink-strong);
+  --color-tab: #4c4c4c;
+  --color-accent: #9e7f66;
+  --color-rule: #8e8e8e;
+  --color-error: #b54949;
+  --color-veil: #f2f3f5;
+
+  --container-board: 69.375rem;
+  --radius-curve: 6.25rem;
+  --shadow-panel: 0 75px 100px -50px rgb(56 66 85 / 0.5);
+}
+
 @theme inline {
   --font-sans: var(--font-league-spartan);
 }
 
 @layer base {
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    @apply bg-white text-ink;
+  }
+
   a,
   button {
     @apply v-focus-ring;
@@ -14,6 +78,12 @@
   button:not(:disabled) {
     @apply cursor-pointer;
   }
+}
+
+@utility v-board {
+  @apply mx-auto w-full px-6 md:px-10;
+
+  max-width: calc(var(--container-board) + 2 * --spacing(10));
 }
 
 @utility v-focus-ring {
