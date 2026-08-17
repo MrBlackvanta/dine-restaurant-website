@@ -74,6 +74,10 @@
     @apply bg-white text-ink;
   }
 
+  source {
+    display: none;
+  }
+
   a,
   button {
     @apply v-focus-ring;
@@ -100,6 +104,26 @@
   &:focus-visible {
     @apply outline-2 outline-offset-4 outline-current;
   }
+}
+
+@utility v-divide {
+  @apply relative h-1.75 w-17.75;
+
+  &::before {
+    @apply absolute inset-y-0 left-0 size-1.75 rounded-full border border-accent content-[''];
+  }
+
+  &::after {
+    @apply absolute top-0.75 left-3.75 h-px w-14 bg-accent content-[''];
+  }
+}
+
+@utility v-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--color-accent) 0 6px,
+    transparent 6px 14px
+  );
 }
 
 @utility v-wipe {

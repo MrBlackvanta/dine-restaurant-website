@@ -12,7 +12,8 @@ const leagueSpartan = League_Spartan({
 const title = "Dine — Exquisite dining since 1989";
 const description =
   "A seasonal menu of locally sourced food in beautiful country surroundings. Book a table at Dine in Marthwaite, Sedbergh — a Frontend Mentor challenge built with Next.js, TypeScript and Tailwind CSS.";
-const siteUrl = "https://dine-restaurant-website.abdelrhman-ahmed8881.workers.dev";
+const siteUrl =
+  "https://dine-restaurant-website.abdelrhman-ahmed8881.workers.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
