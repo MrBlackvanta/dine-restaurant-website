@@ -17,7 +17,7 @@ const twMerge = extendTailwindMerge({
             "body-sm",
             "field",
             "meta",
-            "error",
+            "hint",
           ],
         },
       ],
