@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/layout";
 import type { Metadata, Viewport } from "next";
 import { League_Spartan } from "next/font/google";
 
@@ -45,7 +46,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${leagueSpartan.variable} antialiased`}>
-      <body className="flex min-h-dvh flex-col">{children}</body>
+      <body className="flex min-h-dvh flex-col">
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

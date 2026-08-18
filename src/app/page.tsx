@@ -1,4 +1,10 @@
-import { EventTabs, Hero, MenuPanel, StoryPanels } from "@/views/home";
+import {
+  EventTabs,
+  Hero,
+  MenuPanel,
+  ReservationCta,
+  StoryPanels,
+} from "@/views/home";
 
 export default function Home() {
   return (
@@ -7,6 +13,7 @@ export default function Home() {
       <StoryPanels />
       <MenuPanel />
       <EventTabs />
+      <ReservationCta />
     </main>
   );
 }
