@@ -79,7 +79,8 @@
   }
 
   a,
-  button {
+  button,
+  input {
     @apply v-focus-ring;
   }
 

@@ -15,7 +15,7 @@ export default function Curve({ corner, className }: Props) {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute hidden h-80 w-223.75 bg-veil sm:block",
+        "pointer-events-none absolute h-80 w-223.75 bg-veil",
         corners[corner],
         className,
       )}

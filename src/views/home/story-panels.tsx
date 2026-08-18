@@ -66,12 +66,12 @@ export default function StoryPanels() {
         <StoryPanel panel={enjoyable}>
           <Curve
             corner="top-right"
-            className="top-49 right-1/2 -z-10 wide:top-80 wide:right-95"
+            className="top-49 right-1/2 -z-10 hidden sm:block wide:top-80 wide:right-95"
           />
         </StoryPanel>
 
         <StoryPanel panel={sourced} reverse className="mt-25 sm:mt-30">
-          <PatternLines className="top-57 right-0 wide:top-70.5 wide:-right-28.5" />
+          <PatternLines className="top-57 right-0 hidden sm:block wide:top-70.5 wide:-right-28.5" />
         </StoryPanel>
       </div>
     </div>

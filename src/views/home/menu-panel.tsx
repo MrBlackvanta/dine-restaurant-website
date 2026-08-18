@@ -8,12 +8,15 @@ export default function MenuPanel() {
       className="relative mt-25.25 bg-surface-dark pt-18 pb-25.5 text-white sm:mt-29.5 sm:py-24 wide:-mt-20 wide:pt-50 wide:pb-30"
     >
       <div className="v-rail top-0">
-        <Curve corner="top-left" className="bottom-0 left-1/2 wide:left-95" />
+        <Curve
+          corner="top-left"
+          className="bottom-0 left-1/2 hidden sm:block wide:left-95"
+        />
       </div>
       <div className="v-rail bottom-0">
         <Curve
           corner="top-right"
-          className="top-0 right-1/2 wide:right-182.5"
+          className="top-0 right-1/2 hidden sm:block wide:right-182.5"
         />
       </div>
 

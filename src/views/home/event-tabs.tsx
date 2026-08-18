@@ -35,7 +35,7 @@ export default function EventTabs() {
   return (
     <div className="v-board mt-20 sm:mt-30 wide:mt-40">
       <section className="relative flex flex-col wide:flex-row wide:gap-x-31.25">
-        <PatternLines className="-top-9.5 left-0 wide:-left-10" />
+        <PatternLines className="-top-9.5 left-0 hidden sm:block wide:-left-10" />
 
         <div className="grid w-full sm:mx-auto sm:max-w-143.25 wide:mx-0 wide:w-135 wide:max-w-none wide:shrink-0 wide:self-start">
           {events.map(({ id, image, alt }) => (
