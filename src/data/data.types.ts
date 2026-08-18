@@ -3,7 +3,7 @@ import type { Crop } from "@/components";
 export type ResponsiveImage = {
   mobile: Crop;
   tablet: Crop;
-  desktop: Crop;
+  desktop?: Crop;
 };
 
 export type Panel = {

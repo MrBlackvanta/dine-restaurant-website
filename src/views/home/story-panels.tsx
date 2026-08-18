@@ -61,7 +61,7 @@ export default function StoryPanels() {
   const [enjoyable, sourced] = stories;
 
   return (
-    <div className="relative isolate -mt-18 overflow-x-clip sm:-mt-24 wide:-mt-17.5">
+    <div className="relative isolate z-10 -mt-18 sm:-mt-24 wide:-mt-17.5">
       <div className="v-board">
         <StoryPanel panel={enjoyable}>
           <Curve

@@ -106,6 +106,16 @@
   }
 }
 
+@utility v-rail {
+  @apply pointer-events-none absolute inset-x-0 mx-auto h-0 w-full;
+
+  max-width: var(--container-column);
+
+  @variant wide {
+    max-width: var(--container-board);
+  }
+}
+
 @utility v-divide {
   @apply relative h-1.75 w-17.75;
 
