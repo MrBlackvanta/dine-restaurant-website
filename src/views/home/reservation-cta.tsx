@@ -12,16 +12,18 @@ export default function ReservationCta() {
       aria-labelledby="reservation-title"
       className="relative isolate mt-31 flex h-82 items-center bg-surface-dark text-white sm:mt-30 sm:h-68 wide:mt-40 wide:h-60"
     >
-      <Picture
-        mobile={{ src: readyMobile, src2x: readyMobile2x }}
-        tablet={{ src: readyTablet, src2x: readyTablet2x }}
-        desktop={{ src: readyDesktop, src2x: readyDesktop2x }}
-        alt=""
-        loading="lazy"
-        className="absolute inset-0 -z-10 size-full object-cover"
-      />
+      <div className="absolute inset-0 -z-10 overflow-clip v-unveil">
+        <Picture
+          mobile={{ src: readyMobile, src2x: readyMobile2x }}
+          tablet={{ src: readyTablet, src2x: readyTablet2x }}
+          desktop={{ src: readyDesktop, src2x: readyDesktop2x }}
+          alt=""
+          loading="lazy"
+          className="size-full v-parallax object-cover"
+        />
+      </div>
 
-      <div className="v-board flex flex-col items-center gap-y-5 sm:gap-y-6 wide:flex-row wide:justify-between">
+      <div className="v-board flex v-reveal flex-col items-center gap-y-5 sm:gap-y-6 wide:flex-row wide:justify-between">
         <h2
           id="reservation-title"
           className="text-center text-display-sm font-bold sm:text-section wide:text-left"

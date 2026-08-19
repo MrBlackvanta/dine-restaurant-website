@@ -29,14 +29,14 @@ export default function SegmentGroup({ name, label, error, children }: Props) {
           {label}
         </span>
 
-        {error && (
+        <div className="v-collapse" data-open={Boolean(error) || undefined}>
           <p
             id={groupErrorId(name)}
             className="text-hint font-medium text-error"
           >
             {error}
           </p>
-        )}
+        </div>
       </div>
 
       <div className="flex w-full justify-between sm:w-72.25">{children}</div>

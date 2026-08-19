@@ -59,6 +59,8 @@
   --container-column: 43.0625rem;
   --radius-curve: 6.25rem;
   --shadow-panel: 0 75px 100px -50px rgb(56 66 85 / 0.5);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -68,6 +70,12 @@
 @layer base {
   html {
     overflow-y: scroll;
+
+    interpolate-size: allow-keywords;
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -125,7 +133,15 @@
   }
 
   &::after {
-    @apply absolute top-0.75 left-3.75 h-px w-14 bg-accent content-[''];
+    @apply absolute top-0.75 left-3.75 h-px w-14 origin-left bg-accent content-[''];
+
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        animation: v-draw linear both;
+        animation-timeline: --v-group;
+        animation-range: entry 25% entry 85%;
+      }
+    }
   }
 }
 
@@ -153,5 +169,214 @@
     &::before {
       @apply transition-transform duration-500 ease-out;
     }
+  }
+}
+
+@keyframes v-word-rise {
+  from {
+    transform: translateY(140%);
+  }
+}
+
+@keyframes v-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+@keyframes v-enter-down {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+}
+
+@keyframes v-settle {
+  from {
+    scale: 1.08;
+  }
+}
+
+@keyframes v-swap {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes v-reveal {
+  from {
+    transform: translateY(2.5rem);
+  }
+}
+
+@keyframes v-unveil {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes v-parallax {
+  from {
+    transform: translateY(-2.5%);
+  }
+
+  to {
+    transform: translateY(2.5%);
+  }
+}
+
+@keyframes v-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes v-page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
+@keyframes v-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@utility v-line {
+  display: block;
+  overflow: clip;
+
+  overflow-clip-margin: 0.25em;
+}
+
+@utility v-rise {
+  display: inline-block;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: v-word-rise 1.2s var(--ease-out-expo) both;
+    animation-delay: calc(
+      0.2s + var(--v-line, 0) * 0.12s + var(--v-word, 0) * 0.08s
+    );
+  }
+}
+
+@utility v-enter {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: v-enter 1.1s var(--ease-out-expo) var(--v-enter-delay, 0s) both;
+  }
+}
+
+@utility v-enter-delay-* {
+  --v-enter-delay: calc(--value(number) * 1ms);
+}
+
+@utility v-enter-down {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: v-enter-down 1s var(--ease-out-expo) both;
+  }
+}
+
+@utility v-settle {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: v-settle 2.6s var(--ease-out-expo) both;
+  }
+}
+
+@utility v-swap {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: v-swap 0.6s var(--ease-out-expo) both;
+  }
+}
+
+@utility v-group {
+  view-timeline-name: --v-group;
+}
+
+@utility v-collapse {
+  overflow: clip;
+  height: 0;
+
+  > * {
+    translate: 0 -0.5rem;
+    opacity: 0;
+  }
+
+  &[data-open] {
+    height: auto;
+
+    > * {
+      translate: 0 0;
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: height 0.35s var(--ease-out-expo);
+
+    > * {
+      transition:
+        translate 0.35s var(--ease-out-expo),
+        opacity 0.3s ease-out;
+    }
+  }
+}
+
+@utility v-reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: v-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+
+@utility v-unveil {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: v-unveil linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 70%;
+    }
+  }
+}
+
+@utility v-parallax {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      scale: 1.06;
+      animation: v-parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: 0.7s;
+    animation-timing-function: var(--ease-out-expo);
+  }
+
+  ::view-transition-image-pair(root) {
+    isolation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: v-page-out 0.3s cubic-bezier(0.55, 0, 1, 0.45) both;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-new(root) {
+    animation: v-page-in 0.7s var(--ease-out-expo) both;
+    mix-blend-mode: normal;
   }
 }

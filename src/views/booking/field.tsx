@@ -41,14 +41,14 @@ export default function Field({
         {...input}
       />
 
-      {error && (
+      <div className="v-collapse" data-open={Boolean(error) || undefined}>
         <p
           id={errorId(name)}
-          className="mt-3 px-4 text-hint font-medium text-error"
+          className="px-4 pt-3 text-hint font-medium text-error"
         >
           {error}
         </p>
-      )}
+      </div>
     </div>
   );
 }

@@ -27,10 +27,11 @@ function focusControl(form: HTMLFormElement, name: string) {
 
 export default function ReservationForm() {
   const [values, setValues] = useState(EMPTY_RESERVATION);
-  const [showErrors, setShowErrors] = useState(false);
+  const [submittedAt, setSubmittedAt] = useState<number | null>(null);
   const [sentCount, setSentCount] = useState(0);
 
-  const errors = showErrors ? validate(values) : NO_ERRORS;
+  const errors =
+    submittedAt === null ? NO_ERRORS : validate(values, submittedAt);
 
   function update(patch: Partial<ReservationValues>) {
     setValues((current) => ({ ...current, ...patch }));
@@ -38,18 +39,19 @@ export default function ReservationForm() {
 
   function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
-    const submittedErrors = validate(values);
+    const now = Date.now();
+    const submittedErrors = validate(values, now);
     const firstInvalid = FIELD_ORDER.find((field) => submittedErrors[field]);
 
     if (firstInvalid) {
-      setShowErrors(true);
+      setSubmittedAt(now);
       setSentCount(0);
       focusControl(event.currentTarget, FIRST_CONTROL[firstInvalid]);
       return;
     }
 
     setValues(EMPTY_RESERVATION);
-    setShowErrors(false);
+    setSubmittedAt(null);
     setSentCount(sentCount + 1);
   }
 
@@ -162,11 +164,15 @@ export default function ReservationForm() {
           Make reservation
         </Button>
 
-        <div role="status">
+        <div
+          role="status"
+          className="v-collapse"
+          data-open={sentCount > 0 || undefined}
+        >
           {sentCount > 0 && (
             <p
               key={sentCount}
-              className="mt-4 text-center text-body-sm text-ink-strong"
+              className="pt-4 text-center text-body-sm text-ink-strong"
             >
               Thank you, your table is reserved. A confirmation is on its way.
             </p>

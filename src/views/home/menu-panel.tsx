@@ -21,7 +21,7 @@ export default function MenuPanel() {
       </div>
 
       <div className="v-board flex flex-col wide:flex-row wide:gap-x-31.25">
-        <div className="flex flex-col items-center text-center sm:mx-auto sm:max-w-111.25 wide:mx-0 wide:w-111.25 wide:items-start wide:text-left">
+        <div className="flex v-group v-reveal flex-col items-center text-center sm:mx-auto sm:max-w-111.25 wide:mx-0 wide:w-111.25 wide:items-start wide:text-left">
           <div className="v-divide" />
 
           <h2
@@ -38,7 +38,7 @@ export default function MenuPanel() {
           </p>
         </div>
 
-        <ul className="mt-21.25 divide-y divide-white/15 sm:mx-auto sm:mt-13.5 sm:max-w-143.25 wide:mx-0 wide:mt-13.75 wide:w-135 wide:max-w-none">
+        <ul className="mt-21.25 v-reveal divide-y divide-white/15 sm:mx-auto sm:mt-13.5 sm:max-w-143.25 wide:mx-0 wide:mt-13.75 wide:w-135 wide:max-w-none">
           {dishes.map(({ id, title, body, image, alt }) => (
             <li
               key={id}

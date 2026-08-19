@@ -6,11 +6,13 @@ import { cn } from "@/lib";
 function StoryPanel({
   panel: { id, title, body, image, alt },
   reverse,
+  imageClassName,
   className,
   children,
 }: {
   panel: Panel;
   reverse?: boolean;
+  imageClassName?: string;
   className?: string;
   children?: React.ReactNode;
 }) {
@@ -22,19 +24,24 @@ function StoryPanel({
         className,
       )}
     >
-      <Picture
-        {...image}
-        alt={alt}
-        loading="lazy"
+      <div
         className={cn(
-          "aspect-327/400 w-full object-cover shadow-panel sm:mx-auto sm:aspect-573/360 sm:max-w-143.25 wide:mx-0 wide:aspect-540/720 wide:w-135 wide:max-w-none wide:shrink-0 wide:self-start",
+          "aspect-327/400 w-full overflow-clip shadow-panel sm:mx-auto sm:aspect-573/360 sm:max-w-143.25 wide:mx-0 wide:aspect-540/720 wide:w-135 wide:max-w-none wide:shrink-0 wide:self-start",
           { "wide:order-last": reverse },
+          imageClassName,
         )}
-      />
+      >
+        <Picture
+          {...image}
+          alt={alt}
+          loading="lazy"
+          className="size-full v-parallax object-cover"
+        />
+      </div>
 
       <div
         className={cn(
-          "mt-12 flex flex-col items-center text-center sm:mx-auto sm:mt-14 sm:max-w-114.25 wide:mx-0 wide:mt-61.5 wide:w-111.25 wide:max-w-none wide:items-start wide:text-left",
+          "mt-12 flex v-reveal flex-col items-center text-center v-group sm:mx-auto sm:mt-14 sm:max-w-114.25 wide:mx-0 wide:mt-61.5 wide:w-111.25 wide:max-w-none wide:items-start wide:text-left",
           { "wide:mt-0 wide:mb-61.5 wide:self-end": reverse },
         )}
       >
@@ -70,7 +77,12 @@ export default function StoryPanels() {
           />
         </StoryPanel>
 
-        <StoryPanel panel={sourced} reverse className="mt-25 sm:mt-30">
+        <StoryPanel
+          panel={sourced}
+          reverse
+          imageClassName="v-reveal"
+          className="mt-25 sm:mt-30"
+        >
           <PatternLines className="top-57 right-0 hidden sm:block wide:top-70.5 wide:-right-28.5" />
         </StoryPanel>
       </div>
