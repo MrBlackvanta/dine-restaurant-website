@@ -139,7 +139,7 @@
       @supports (animation-timeline: view()) {
         animation: v-draw linear both;
         animation-timeline: --v-group;
-        animation-range: cover 20% cover 50%;
+        animation-range: cover 160px cover 300px;
       }
     }
   }
@@ -313,12 +313,13 @@
       view-timeline-name: --v-group;
       animation: v-unmask linear both;
       animation-timeline: view();
-      animation-range: cover 8% cover 42%;
+
+      animation-range: cover 80px cover 320px;
 
       > * {
         animation: v-emerge linear both;
         animation-timeline: --v-group;
-        animation-range: cover 8% cover 55%;
+        animation-range: cover 80px cover 360px;
       }
     }
   }
