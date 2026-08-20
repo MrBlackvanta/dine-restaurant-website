@@ -21,7 +21,7 @@ export default function MenuPanel() {
       </div>
 
       <div className="v-board flex flex-col wide:flex-row wide:gap-x-31.25">
-        <div className="flex v-group v-reveal flex-col items-center text-center sm:mx-auto sm:max-w-111.25 wide:mx-0 wide:w-111.25 wide:items-start wide:text-left">
+        <div className="flex v-reveal flex-col items-center text-center sm:mx-auto sm:max-w-111.25 wide:mx-0 wide:w-111.25 wide:items-start wide:text-left">
           <div className="v-divide" />
 
           <h2

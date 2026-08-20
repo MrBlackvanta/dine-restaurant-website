@@ -5,7 +5,11 @@ import {
   EMPTY_RESERVATION,
   FIELD_ORDER,
   FIRST_CONTROL,
+  NUMERIC_FIELDS,
+  isReachable,
+  rangeFor,
   validate,
+  withDayInMonth,
   type ReservationErrors,
   type ReservationValues,
 } from "@/lib";
@@ -34,7 +38,16 @@ export default function ReservationForm() {
     submittedAt === null ? NO_ERRORS : validate(values, submittedAt);
 
   function update(patch: Partial<ReservationValues>) {
-    setValues((current) => ({ ...current, ...patch }));
+    setValues((current) => {
+      const next = { ...current, ...patch };
+
+      const refused = NUMERIC_FIELDS.some(
+        (field) =>
+          field in patch && !isReachable(next[field], rangeFor(field, next)),
+      );
+
+      return refused ? current : withDayInMonth(next);
+    });
   }
 
   function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -86,7 +99,7 @@ export default function ReservationForm() {
       <SegmentGroup name="date" label="Pick a date" error={errors.date}>
         <Field
           name="month"
-          label="Month"
+          label="Month, 1 to 12"
           placeholder="MM"
           inputMode="numeric"
           maxLength={2}
@@ -110,7 +123,7 @@ export default function ReservationForm() {
         />
         <Field
           name="year"
-          label="Year"
+          label="Year, this year or next"
           placeholder="YYYY"
           inputMode="numeric"
           maxLength={4}
@@ -125,7 +138,7 @@ export default function ReservationForm() {
       <SegmentGroup name="time" label="Pick a time" error={errors.time}>
         <Field
           name="hour"
-          label="Hour"
+          label="Hour, 1 to 12"
           placeholder="09"
           inputMode="numeric"
           maxLength={2}
@@ -137,7 +150,7 @@ export default function ReservationForm() {
         />
         <Field
           name="minute"
-          label="Minute"
+          label="Minute, 0 to 59"
           placeholder="00"
           inputMode="numeric"
           maxLength={2}

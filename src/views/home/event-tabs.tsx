@@ -106,13 +106,13 @@ export default function EventTabs() {
               aria-labelledby={tabId(id)}
               hidden={id !== activeId}
               tabIndex={0}
-              className="mt-5 w-full v-swap sm:mt-12 sm:w-114.25 wide:mt-0 wide:w-full"
+              className="mt-5 w-full sm:mt-12 sm:w-114.25 wide:mt-0 wide:w-full"
             >
-              <h2 className="text-display-sm font-bold text-ink sm:text-section">
+              <h2 className="v-swap text-display-sm font-bold text-ink sm:text-section">
                 {title}
               </h2>
 
-              <p className="mt-3 text-body-sm text-ink sm:mt-5 sm:min-h-30 sm:text-body">
+              <p className="mt-3 v-swap text-body-sm text-ink v-swap-delay-80 sm:mt-5 sm:min-h-30 sm:text-body">
                 {body}
               </p>
             </div>

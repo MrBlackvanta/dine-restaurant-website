@@ -50,14 +50,82 @@ export const FIRST_CONTROL: Record<ReservationField, string> = {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const DIGITS = /^\d+$/;
 
+export const NUMERIC_FIELDS = [
+  "month",
+  "day",
+  "year",
+  "hour",
+  "minute",
+] as const;
+
+export type NumericField = (typeof NUMERIC_FIELDS)[number];
+
+type Range = { min: number; max: number; width: number };
+
+type PartialDate = Pick<ReservationValues, "month" | "year">;
+
+const lastDayOfMonth = (year: number, month: number) =>
+  new Date(year, month, 0).getDate();
+
+function lastDayTyped({ month, year }: PartialDate) {
+  const parsedMonth = Number(month);
+  if (!DIGITS.test(month) || parsedMonth < 1 || parsedMonth > 12) return 31;
+
+  const parsedYear =
+    year.length === 4 && DIGITS.test(year)
+      ? Number(year)
+      : new Date().getFullYear();
+
+  return lastDayOfMonth(parsedYear, parsedMonth);
+}
+
+export function rangeFor(
+  field: NumericField,
+  values: ReservationValues,
+): Range {
+  switch (field) {
+    case "month":
+      return { min: 1, max: 12, width: 2 };
+    case "day":
+      return { min: 1, max: lastDayTyped(values), width: 2 };
+    case "year": {
+      const thisYear = new Date().getFullYear();
+      return { min: thisYear, max: thisYear + 1, width: 4 };
+    }
+    case "hour":
+      return { min: 1, max: 12, width: 2 };
+    case "minute":
+      return { min: 0, max: 59, width: 2 };
+  }
+}
+
+export function isReachable(text: string, { min, max, width }: Range) {
+  if (text === "") return true;
+  if (!DIGITS.test(text) || text.length > width) return false;
+
+  for (let value = min; value <= max; value++) {
+    const plain = String(value);
+    if (plain.startsWith(text)) return true;
+    if (plain.padStart(width, "0").startsWith(text)) return true;
+  }
+
+  return false;
+}
+
+export function withDayInMonth(values: ReservationValues): ReservationValues {
+  const lastDay = lastDayTyped(values);
+  if (!values.day || Number(values.day) <= lastDay) return values;
+
+  return { ...values, day: String(lastDay).padStart(values.day.length, "0") };
+}
+
 function readDate({ month, day, year }: ReservationValues) {
   if (![year, month, day].every((part) => DIGITS.test(part))) return null;
 
   const parsed = { year: Number(year), month: Number(month), day: Number(day) };
   if (parsed.month < 1 || parsed.month > 12) return null;
-
-  const lastDay = new Date(parsed.year, parsed.month, 0).getDate();
-  if (parsed.day < 1 || parsed.day > lastDay) return null;
+  if (parsed.day < 1 || parsed.day > lastDayOfMonth(parsed.year, parsed.month))
+    return null;
 
   return parsed;
 }

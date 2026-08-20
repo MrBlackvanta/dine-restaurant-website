@@ -21,7 +21,7 @@ export default function SiteFooter() {
             <br />
             Cumbria
             <br />
-            <a href="tel:+00441234567">+00 44 123 4567</a>
+            <a href="tel:+00441234567">+00&nbsp;44&nbsp;123&nbsp;4567</a>
           </address>
 
           <div className="uppercase wide:flex-1">

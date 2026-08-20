@@ -139,7 +139,7 @@
       @supports (animation-timeline: view()) {
         animation: v-draw linear both;
         animation-timeline: --v-group;
-        animation-range: entry 25% entry 85%;
+        animation-range: cover 20% cover 50%;
       }
     }
   }
@@ -201,13 +201,23 @@
 @keyframes v-swap {
   from {
     opacity: 0;
-    transform: translateY(0.75rem);
+    translate: 0 0.75rem;
   }
 }
 
-@keyframes v-reveal {
+@keyframes v-unmask {
   from {
-    transform: translateY(2.5rem);
+    clip-path: inset(0% -1rem 100% -1rem);
+  }
+
+  to {
+    clip-path: inset(-20% -1rem -20% -1rem);
+  }
+}
+
+@keyframes v-emerge {
+  from {
+    transform: translateY(2.75rem);
   }
 }
 
@@ -289,12 +299,29 @@
 
 @utility v-swap {
   @media (prefers-reduced-motion: no-preference) {
-    animation: v-swap 0.6s var(--ease-out-expo) both;
+    animation: v-swap 0.6s var(--ease-out-expo) var(--v-swap-delay, 0s) both;
   }
 }
 
-@utility v-group {
-  view-timeline-name: --v-group;
+@utility v-swap-delay-* {
+  --v-swap-delay: calc(--value(number) * 1ms);
+}
+
+@utility v-reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      view-timeline-name: --v-group;
+      animation: v-unmask linear both;
+      animation-timeline: view();
+      animation-range: cover 8% cover 42%;
+
+      > * {
+        animation: v-emerge linear both;
+        animation-timeline: --v-group;
+        animation-range: cover 8% cover 55%;
+      }
+    }
+  }
 }
 
 @utility v-collapse {
@@ -322,16 +349,6 @@
       transition:
         translate 0.35s var(--ease-out-expo),
         opacity 0.3s ease-out;
-    }
-  }
-}
-
-@utility v-reveal {
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      animation: v-reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 80%;
     }
   }
 }
