@@ -32,7 +32,7 @@ export default function ReservationHero() {
         className="bottom-0 left-0 -z-10 hidden w-248.25 wide:block"
       />
 
-      <SiteHeader className="justify-center pt-14 v-enter-down sm:justify-start wide:pt-16" />
+      <SiteHeader className="v-enter-down justify-center pt-14 sm:justify-start wide:pt-16" />
 
       <div className="v-board mt-11 flex flex-col sm:mt-17.5 wide:mt-38.5 wide:flex-row wide:items-start wide:gap-x-31.25">
         <div className="w-full text-center wide:w-111.25 wide:text-left">

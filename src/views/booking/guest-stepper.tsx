@@ -1,8 +1,8 @@
 import { MinusIcon, PlusIcon } from "@/components/icons";
-import { GUEST_MAX, GUEST_MIN } from "@/lib";
+import { cn, GUEST_MAX, GUEST_MIN } from "@/lib";
 
 const step =
-  "-my-2.5 flex h-11 items-center px-4.75 text-accent disabled:opacity-50 sm:px-8";
+  "-my-2.5 flex h-11 items-center px-4.75 text-accent sm:px-8 aria-disabled:opacity-50";
 
 export default function GuestStepper({
   value,
@@ -11,14 +11,17 @@ export default function GuestStepper({
   value: number;
   onChange: (guests: number) => void;
 }) {
+  const atMin = value <= GUEST_MIN;
+  const atMax = value >= GUEST_MAX;
+
   return (
     <div className="flex items-center justify-between border-b border-rule pb-4">
       <button
         type="button"
         aria-label="Remove a guest"
-        disabled={value <= GUEST_MIN}
-        onClick={() => onChange(value - 1)}
-        className={step}
+        aria-disabled={atMin || undefined}
+        onClick={() => !atMin && onChange(value - 1)}
+        className={cn(step, atMin && "cursor-not-allowed")}
       >
         <MinusIcon />
       </button>
@@ -30,9 +33,9 @@ export default function GuestStepper({
       <button
         type="button"
         aria-label="Add a guest"
-        disabled={value >= GUEST_MAX}
-        onClick={() => onChange(value + 1)}
-        className={step}
+        aria-disabled={atMax || undefined}
+        onClick={() => !atMax && onChange(value + 1)}
+        className={cn(step, atMax && "cursor-not-allowed")}
       >
         <PlusIcon />
       </button>

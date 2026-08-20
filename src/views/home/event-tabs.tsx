@@ -37,7 +37,7 @@ export default function EventTabs() {
       <section className="relative flex flex-col wide:flex-row wide:gap-x-31.25">
         <PatternLines className="-top-9.5 left-0 hidden sm:block wide:-left-10" />
 
-        <div className="relative aspect-327/400 w-full overflow-clip v-unveil sm:mx-auto sm:aspect-573/360 sm:max-w-143.25 wide:mx-0 wide:aspect-540/600 wide:w-135 wide:max-w-none wide:shrink-0 wide:self-start">
+        <div className="relative aspect-327/400 w-full v-unveil overflow-clip sm:mx-auto sm:aspect-573/360 sm:max-w-143.25 wide:mx-0 wide:aspect-540/600 wide:w-135 wide:max-w-none wide:shrink-0 wide:self-start">
           {events.map(({ id, image, alt }) => (
             <div
               key={id}

@@ -3,6 +3,8 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
+const COMMIT_TIMEOUT = 1000;
+
 export default function RouteTransitions() {
   const router = useRouter();
   const pathname = usePathname();
@@ -36,13 +38,18 @@ export default function RouteTransitions() {
       event.preventDefault();
       commit.current?.();
 
-      document.startViewTransition(() => {
+      const transition = document.startViewTransition(() => {
         const committed = new Promise<void>((resolve) => {
           commit.current = resolve;
         });
         router.push(link.pathname + link.search + link.hash);
-        return committed;
+        return Promise.race([
+          committed,
+          new Promise<void>((give) => setTimeout(give, COMMIT_TIMEOUT)),
+        ]);
       });
+
+      transition.ready.catch(() => {});
     }
 
     document.addEventListener("click", handleClick, true);

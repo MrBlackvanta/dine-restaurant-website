@@ -23,7 +23,7 @@ export default function Hero() {
         className="aspect-375/232 w-full object-cover object-top sm:aspect-768/374 wide:absolute wide:inset-y-0 wide:right-0 wide:-z-10 wide:aspect-auto wide:h-full wide:w-auto wide:max-w-none wide:v-settle"
       />
 
-      <SiteHeader className="justify-center v-enter-down wide:justify-start wide:pt-16" />
+      <SiteHeader className="v-enter-down justify-center wide:justify-start wide:pt-16" />
 
       <div className="v-board mt-9 flex flex-col items-center text-center sm:mt-10 wide:mt-38 wide:items-start wide:text-left">
         <h1

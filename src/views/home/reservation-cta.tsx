@@ -12,7 +12,7 @@ export default function ReservationCta() {
       aria-labelledby="reservation-title"
       className="relative isolate mt-31 flex h-82 items-center bg-surface-dark text-white sm:mt-30 sm:h-68 wide:mt-40 wide:h-60"
     >
-      <div className="absolute inset-0 -z-10 overflow-clip v-unveil">
+      <div className="absolute inset-0 -z-10 v-unveil overflow-clip">
         <Picture
           mobile={{ src: readyMobile, src2x: readyMobile2x }}
           tablet={{ src: readyTablet, src2x: readyTablet2x }}
