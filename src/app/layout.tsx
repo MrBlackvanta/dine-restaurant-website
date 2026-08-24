@@ -13,9 +13,16 @@ const leagueSpartan = League_Spartan({
   display: "swap",
 });
 
-const title = "Dine — Exquisite dining since 1989";
+const title = "Dine | Exquisite dining since 1989";
 const description =
-  "A seasonal menu of locally sourced food in beautiful country surroundings. Book a table at Dine in Marthwaite, Sedbergh — a Frontend Mentor challenge built with Next.js, TypeScript and Tailwind CSS.";
+  "A seasonal menu of locally sourced food in beautiful country surroundings. Book a table at our farmhouse restaurant in Marthwaite, Sedbergh.";
+
+const card = {
+  url: "/opengraph-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Dine, exquisite dining since 1989",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,16 +30,14 @@ export const metadata: Metadata = {
   description,
   alternates: { canonical: "/" },
   openGraph: {
-    title,
-    description,
     siteName: "Dine",
     locale: "en_US",
     type: "website",
+    images: [card],
   },
   twitter: {
-    card: "summary",
-    title,
-    description,
+    card: "summary_large_image",
+    images: [card],
   },
 };
 
