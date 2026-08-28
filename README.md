@@ -1,43 +1,31 @@
-# Frontend Mentor - Dine restaurant website solution
+# Dine restaurant website
 
-This is a solution to the [Dine restaurant website challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/dine-restaurant-website-yAt7Vvxt7). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
-
-## Table of contents
-
-- [Overview](#overview)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [Design deviations](#design-deviations)
-- [Author](#author)
-
-## Overview
-
-### Screenshot
+My solution to the [Dine restaurant website](https://www.frontendmentor.io/challenges/dine-restaurant-website-yAt7Vvxt7)
+challenge on Frontend Mentor.
 
 ![](./screenshot.webp)
 
-### Links
+- Live: https://dine-restaurant-website.abdelrhman-ahmed8881.workers.dev
+- Code: https://github.com/MrBlackvanta/dine-restaurant-website
 
-- Solution URL: [GitHub](https://github.com/MrBlackvanta/dine-restaurant-website)
-- Live Site URL: [Cloudflare](https://dine-restaurant-website.abdelrhman-ahmed8881.workers.dev)
+## Built with
 
-## My process
+- Next.js 16, App Router, static export
+- React 19 and TypeScript
+- Tailwind CSS v4
 
-### Built with
+## Notes
 
-- [Next.js 16](https://nextjs.org/) (App Router, React Compiler, Turbopack, static export)
-- [React 19](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/) (strict)
-- [Tailwind CSS v4](https://tailwindcss.com/)
+The guest stepper uses `aria-disabled` rather than `disabled` at its bounds. Chrome moves
+focus to `<body>` the moment the focused element becomes disabled, so a keyboard user
+stepping down to the minimum loses their place and has to tab back from the top of the
+page. Keeping the button focusable and guarding the handler avoids that.
 
-### Design deviations
-
-_Recorded as the build proceeds._
+Images are art-directed per breakpoint through a small `<picture>` wrapper rather than
+`next/image`, since this is a static export and the crops change.
 
 ## Author
 
-- UpWork - [Abdelrhman Abdelaal](https://www.upwork.com/freelancers/mrblackvanta)
-- Frontend Mentor - [@MrBlackvanta](https://www.frontendmentor.io/profile/MrBlackvanta)
-- LinkedIn - [Abdelrhman Abdelaal](https://www.linkedin.com/in/abdelrhman-vanta/)
+- [LinkedIn](https://www.linkedin.com/in/abdelrhman-vanta/)
+- [UpWork](https://www.upwork.com/freelancers/mrblackvanta)
+- [Frontend Mentor](https://www.frontendmentor.io/profile/MrBlackvanta)
