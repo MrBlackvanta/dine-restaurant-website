@@ -10,19 +10,10 @@ challenge on Frontend Mentor.
 
 ## Built with
 
-- Next.js 16, App Router, static export
-- React 19 and TypeScript
-- Tailwind CSS v4
-
-## Notes
-
-The guest stepper uses `aria-disabled` rather than `disabled` at its bounds. Chrome moves
-focus to `<body>` the moment the focused element becomes disabled, so a keyboard user
-stepping down to the minimum loses their place and has to tab back from the top of the
-page. Keeping the button focusable and guarding the handler avoids that.
-
-Images are art-directed per breakpoint through a small `<picture>` wrapper rather than
-`next/image`, since this is a static export and the crops change.
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
 
 ## Author
 
